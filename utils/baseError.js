@@ -20,6 +20,28 @@ class NotFoundError extends BaseError {
   }
 }
 
+class BadRequestError extends BaseError {
+  constructor(
+    message,
+    name = "BadRequestError",
+    isOperational = true,
+    statusCode = httpStatusCode.clientError.BadRequest
+  ) {
+    super(name, statusCode, isOperational, message);
+  }
+}
+
+class UnauthorizedError extends BaseError {
+  constructor(
+    message,
+    name = "Unauthorized",
+    isOperational = true,
+    statusCode = httpStatusCode.clientError.Unauthorized
+  ) {
+    super(name, statusCode, isOperational, message);
+  }
+}
+
 class ForbiddenError extends BaseError {
   constructor(
     message,
@@ -33,5 +55,7 @@ class ForbiddenError extends BaseError {
 
 module.exports = {
   NotFoundError,
-  ForbiddenError
+  ForbiddenError,
+  UnauthorizedError,
+  BadRequestError
 }
