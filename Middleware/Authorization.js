@@ -15,7 +15,7 @@ const auth = function (req, res, next) {
     if (err)
     throw JwtError('Invalid Token');
 
-    req.token = decode;
+    req.userName = decode.userName;
   });
 
   next();

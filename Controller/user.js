@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../Models/user');
-const {NotFoundError, UnauthorizedError} = require('../utils/baseError');
+const {NotFoundError, UnauthorizedError, JwtError} = require('../utils/baseError');
 const statusCodes = require('../utils/statusCodes');
 
 const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
@@ -67,15 +67,15 @@ const login = async function (req, res) {
 const renewToken = function (req, res) {
   const authorization = req.headers?.authorization;
   if (!authorization) 
-    throw JwtError('No token detected');
+    throw new JwtError('No token detected');
   
   const token = authorization.split(' ')[1];
   if (!token)
-    throw JwtError('No token detected');
+    throw new JwtError('No token detected');
 
   jwt.verify(token, JWT_REFRESH_SECRET, (err, decode) => {
     if (err)
-    throw JwtError('Invalid Token');
+    throw new JwtError('Invalid Token');
 
   req.accessToken = jwt.sign(
     { userName: decode.userName },
