@@ -34,7 +34,17 @@ class BadRequestError extends BaseError {
 class UnauthorizedError extends BaseError {
   constructor(
     message,
-    name = "Unauthorized",
+    name = "UnauthorizedError",
+    isOperational = true,
+    statusCode = httpStatusCode.clientError.Unauthorized
+  ) {
+    super(name, statusCode, isOperational, message);
+  }
+}
+class JwtError extends BaseError {
+  constructor(
+    message,
+    name = "UnauthorizedJwtError",
     isOperational = true,
     statusCode = httpStatusCode.clientError.Unauthorized
   ) {
@@ -57,5 +67,6 @@ module.exports = {
   NotFoundError,
   ForbiddenError,
   UnauthorizedError,
-  BadRequestError
+  BadRequestError,
+  JwtError
 }

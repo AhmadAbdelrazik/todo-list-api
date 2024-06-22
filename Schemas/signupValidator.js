@@ -11,7 +11,7 @@ const schema = {
       minLength: 8
     }
   },
-  required: ["userName", "password"],
+  required: ["userName", "password", "name"],
   additionalProperties: false,  
 };
 

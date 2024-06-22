@@ -3,6 +3,7 @@ const {
   ForbiddenError,
   BadRequestError,
   UnauthorizedError,
+  JwtError,
 } = require("../utils/baseError");
 const statusCodes = require("../utils/statusCodes");
 
@@ -21,8 +22,11 @@ const errorHandler = function (err, req, res, next) {
     err instanceof UnauthorizedError
   ) {
     return res.status(err.statusCode).json({ error: err.message });
+  } else if (err instanceof JwtError) {
+    res.set("WWW-Authenticate", `Bearer realm="To-Do App"`);
+    return res.status(err.statusCode).json({ error: err.message });
   }
-
+  
   // Default
   res
     .status(statusCodes.serverError.InternalServerError)
