@@ -4,7 +4,6 @@ const router = express.Router();
 const { login, renewToken, signup } = require("../Controller/user");
 const {
   controllerAsyncHandler,
-  middlewareAsyncHandler,
 } = require("../utils/asyncHandler");
 
 // User end points.
