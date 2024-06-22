@@ -87,3 +87,9 @@ const renewToken = function (req, res) {
   
   res.json({accessToken: req.accessToken});
 }
+
+module.exports = {
+  login,
+  signup,
+  renewToken
+}
