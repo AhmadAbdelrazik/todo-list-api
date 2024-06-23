@@ -30,7 +30,12 @@ const create = async function (req, res) {
 
 // Read
 const readAll = async function (req, res) {
-  const tasks = await Task.find({userName: req.userName});
+  const query = {userName: req.userName};
+
+  if (req.query.status && typeof req.query.status === 'string')
+    query.status = req.query.status
+
+  const tasks = await Task.find(query);
 
   if (!tasks.length)
     throw new NotFoundError('No tasks yet');
