@@ -8,6 +8,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+const taskRoute = require('./Routes/tasks');
+const userRoute = require('./Routes/user');
+
 // Connect to database
 const mongoose = require('mongoose');
 
@@ -19,6 +22,9 @@ connectDb(`todo`);
 
 // Main routing
 
+app.use('/api/tasks', taskRoute);
+
+app.use('/api', userRoute);
 
 // Start the server.
 
